@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>IBSN</th>
+    </tr>
+    <tr *ngFor="let book of books; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{book.id}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.ibsn}}</td>
+    </tr>
+</table>

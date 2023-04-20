@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
 
@@ -9,11 +10,11 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
 })
 export class BookComponent {
   public books?:  Book[];
+  
 
-  constructor(private httpService : HttpServiceService) {}
+  constructor(private httpService : HttpServiceService, private router: Router) {}
 
   ngOnInit() {
-    console.log("test");
     this.showBooks();
 
   }
@@ -22,4 +23,10 @@ export class BookComponent {
     
     this.httpService.getAll().subscribe(books => this.books = books);
   }
+
+  goToDetails(book: Book): void {
+    // this.router.navigate(['/details', book.id]);
+    this.router.navigate(['/details'], { queryParams: { id: book.id } }); // /details?id={id}
+  }
+
 }

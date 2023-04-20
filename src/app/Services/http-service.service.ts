@@ -9,10 +9,12 @@ export class HttpServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'https://localhost:7263/api/books/';
+  private url = 'https://localhost:7263/api/books';
 
   getAll(): Observable<any> {
     return this.http.get<any>(`${this.url}`);
   }
-  
+  get(id: any): Observable<any> {
+    return this.http.get<any>(`${this.url}?id=${id}`);
+  }
 }

@@ -13,12 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {MatTableModule} from '@angular/material/table';
+import { BookDetailsComponent } from './Books/book-details/book-details.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

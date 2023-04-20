@@ -25,4 +25,8 @@ export class HttpServiceService {
   put(book: any, id: any): Observable<any> {
     return this.http.put<any>(`${this.url}/${id}`, book);
   }
+
+  delete(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.url}?id=${id}`, id);
+  }
 }

@@ -29,7 +29,7 @@ import { BookUpdateComponent } from './Books/book-update/book-update.component';
     PageNotFoundComponent,
     BookDetailsComponent,
     BookCreateComponent,
-    BookUpdateComponent
+    BookUpdateComponent    
   ],
   imports: [
     BrowserModule,

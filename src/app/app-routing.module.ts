@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'books/details', component: BookDetailsComponent },
 
   { path: 'books/create', component: BookCreateComponent },
-  { path: 'books/update/:id', component: BookUpdateComponent }
+  { path: 'books/update/:id', component: BookUpdateComponent },
   { path: '**', component: PageNotFoundComponent },
 
 ];

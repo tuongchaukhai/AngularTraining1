@@ -4,16 +4,17 @@
         <th>ID</th>
         <th>Title</th>
         <!-- <th>Author</th>
-        <th>IBSN</th> -->
+            <th>IBSN</th> -->
     </tr>
     <tr *ngFor="let book of books; let i = index" (click)="goToDetails(book)">
         <td>{{i+1}}</td>
         <td>{{book.id}}</td>
         <td>{{book.title}}</td>
         <!-- <td>{{book.ibsn}}</td>
-        <td>
-            <button mat-button style="color: black; background-color:beige;">Edit</button>
-            <button mat-button style="color: black; background-color:beige;">Delete</button>
-        </td> -->
+            <td>
+                <button mat-button style="color: black; background-color:beige;">Edit</button>
+                <button mat-button style="color: black; background-color:beige;">Delete</button>
+            </td> -->
     </tr>
 </table>
+<button mat-raised-button color="primary" (click)="createBookRoute()">Create</button>

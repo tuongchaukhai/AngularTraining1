@@ -15,14 +15,19 @@ import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatTableModule} from '@angular/material/table';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
-
+import { BookCreateComponent } from './Books/book-create/book-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     PageNotFoundComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    BookCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +36,16 @@ import { BookDetailsComponent } from './Books/book-details/book-details.componen
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
+    MatInputModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
     MatBadgeModule,
     MatTableModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

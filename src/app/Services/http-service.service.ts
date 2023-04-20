@@ -17,4 +17,8 @@ export class HttpServiceService {
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.url}?id=${id}`);
   }
+
+  post(book: any): Observable<any> {
+    return this.http.post<any>(`${this.url}`, book);
+  }
 }

@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
+import { BookCreateComponent } from './Books/book-create/book-create.component';
 
 const routes: Routes = [
   { path: 'books', component: BookComponent },
-  { path: 'details', component: BookDetailsComponent },
+  { path: 'books/details', component: BookDetailsComponent },
+  {path: 'books/create', component: BookCreateComponent},
   { path: '*', component: PageNotFoundComponent }
 ];
 

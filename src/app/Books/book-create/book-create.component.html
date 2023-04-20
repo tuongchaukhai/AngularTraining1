@@ -1,0 +1,46 @@
+<!-- <form [formGroup]="formData">
+    <label>Title: <input type="text" formControlName="title"/></label> <br/>
+    <label>Author: <input type="text" formControlName="author"/></label><br/>
+    <label>ISBN: <input type="text" formControlName="isbn"/></label><br/>
+</form> -->
+
+<mat-card-content>
+    <form [formGroup]="formData">
+        <table>
+            <tr>
+                <h2 style="text-align: center;">Create New Book</h2>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <mat-form-field class="demo-full-width">
+                        <input matInput placeholder="Title" formControlName="title" />
+                        <mat-error *ngIf="formData.controls['title'].hasError('required')">Title is required</mat-error>
+                        <mat-error *ngIf="formData.controls['title'].hasError('maxlength')">Max length is 150</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <mat-form-field class="demo-full-width">
+                        <input matInput placeholder="Author" formControlName="author" />
+                         <mat-error *ngIf="formData.controls['author'].hasError('maxlength')">Max length is 100</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <mat-form-field class="demo-full-width">
+                        <input matInput placeholder="IBSN" formControlName="ibsn" />
+                        <mat-error *ngIf="formData.controls['ibsn'].hasError('pattern')">Number only</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="content-center">
+                    <button mat-raised-button color="accent" (click)="formSubmit()" [disabled]="!formData.valid">Submit</button>
+                    <button mat-raised-button color="accent" (click)="formReset()">Clear</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</mat-card-content>

@@ -26,7 +26,10 @@ export class BookComponent {
 
   goToDetails(book: Book): void {
     // this.router.navigate(['/details', book.id]);
-    this.router.navigate(['/details'], { queryParams: { id: book.id } }); // /details?id={id}
+    this.router.navigate(['books/details'], { queryParams: { id: book.id } }); // /details?id={id}
   }
 
+  createBookRoute(): void {
+    this.router.navigate(['books/create']);
+  }
 }

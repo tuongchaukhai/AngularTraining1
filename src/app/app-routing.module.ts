@@ -9,6 +9,7 @@ import { BookUpdateComponent } from './Books/book-update/book-update.component';
 const routes: Routes = [
   { path: 'books', component: BookComponent },
   { path: 'books/details', component: BookDetailsComponent },
+
   { path: 'books/create', component: BookCreateComponent },
   { path: '*', component: PageNotFoundComponent },
   { path: 'books/update/:id', component: BookUpdateComponent }

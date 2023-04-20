@@ -14,12 +14,17 @@ export class BookDetailsComponent {
   constructor(private httpService: HttpServiceService, private route: ActivatedRoute, private router: Router) { }
   public bookShow: Book[] = [];
   public id: any;
-
+  public title: any;
+  public author: any;
 
   ngOnInit() {
-    this.id = this.route.snapshot.queryParamMap.get('id'); //snapshot lấy giá trị tham số trên URL (VD: /details/5 => lấy 5) *Phải khai báo param ở routes trong routing module.
-    this.httpService.get(this.id).subscribe(x => {
-      this.bookShow = x;
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      const title = params['title'];
+      const author = params['author'];
+      this.httpService.get(id, title, author).subscribe(x => {
+        this.bookShow = x;
+      });
     }
     );
   }

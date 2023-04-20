@@ -20,7 +20,6 @@ export class BookComponent {
   }
 
   showBooks(): void {
-    
     this.httpService.getAll().subscribe(books => this.books = books);
   }
 

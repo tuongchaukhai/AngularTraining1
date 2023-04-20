@@ -17,6 +17,7 @@ export class BookDetailsComponent {
   public title: any;
   public author: any;
 
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
@@ -33,9 +34,10 @@ export class BookDetailsComponent {
     this.router.navigate(['books/update', this.bookShow[0].id]);
   }
 
-  deleteBook(id: any): void {
+  deleteBook(): void {
+    debugger
     if (window.confirm('Chắc chắn xóa?')) {
-      this.httpService.delete(id).subscribe(data => {
+      this.httpService.delete(this.bookShow[0].id).subscribe(data => {
         if (data == null) {
           alert('thành công');
           this.router.navigate(['books']);

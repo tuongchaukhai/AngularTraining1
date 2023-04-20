@@ -15,7 +15,7 @@ export class BookCreateComponent {
   constructor(private fb: FormBuilder, private httpService: HttpServiceService, private router: Router) {
     this.formData = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(150)]],
-      author: ['', [Validators.maxLength(100)]],
+      author: ['', [Validators.required, Validators.maxLength(100)]],
       ibsn: ['', [Validators.pattern(/^\d+$/)]]
     });
   }

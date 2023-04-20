@@ -10,11 +10,10 @@
         <td>{{i+1}}</td>
         <td>{{book.id}}</td>
         <td>{{book.title}}</td>
-        <!-- <td>{{book.ibsn}}</td>
-            <td>
-                <button mat-button style="color: black; background-color:beige;">Edit</button>
-                <button mat-button style="color: black; background-color:beige;">Delete</button>
-            </td> -->
+        <td>
+            <button mat-button style="color: black; background-color:beige;" (click)="routeToUpdate(book.id); $event.stopPropagation()">Edit</button>
+            <button mat-button style="color: black; background-color:beige;" (click)="deleteBook(book.id); $event.stopPropagation()">Delete</button>
+        </td>
     </tr>
 </table>
 <button mat-raised-button color="primary" (click)="createBookRoute()">Create</button>

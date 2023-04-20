@@ -16,8 +16,7 @@ export class HttpServiceService {
     return this.http.get<any>(`${this.url}`);
   }
   get(id?: any, title?: any, author?: any): Observable<any> {
-    debugger
-    if (id != undefined)
+        if (id != undefined)
       return this.http.get<any>(`${this.url}?id=${id}`);
     else if (title != undefined)
       return this.http.get<any>(`${this.url}?title=${title}`);

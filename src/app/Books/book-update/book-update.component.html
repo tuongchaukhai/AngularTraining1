@@ -7,7 +7,7 @@
             <tr>
                 <td colspan="2">
                     <mat-form-field class="demo-full-width">
-                        <input matInput placeholder="Title" formControlName="title" />
+                        <input matInput placeholder="Title" formControlName="title" autofocus/>
                         <mat-error *ngIf="formData.controls['title'].hasError('required')">Title is required</mat-error>
                         <mat-error *ngIf="formData.controls['title'].hasError('maxlength')">Max length is 150</mat-error>
                     </mat-form-field>
@@ -17,7 +17,8 @@
                 <td colspan="2">
                     <mat-form-field class="demo-full-width">
                         <input matInput placeholder="Author" formControlName="author" />
-                         <mat-error *ngIf="formData.controls['author'].hasError('maxlength')">Max length is 100</mat-error>
+                        <mat-error *ngIf="formData.controls['title'].hasError('required')">Author is required</mat-error>
+                        <mat-error *ngIf="formData.controls['author'].hasError('maxlength')">Max length is 100</mat-error>
                     </mat-form-field>
                 </td>
             </tr>

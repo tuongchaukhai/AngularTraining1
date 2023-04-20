@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
@@ -9,10 +10,10 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent {
-  public books?:  Book[];
-  
+  public books?: Book[];
 
-  constructor(private httpService : HttpServiceService, private router: Router) {}
+
+  constructor(private httpService: HttpServiceService, private router: Router) { }
 
   ngOnInit() {
     this.showBooks();
@@ -30,5 +31,26 @@ export class BookComponent {
 
   createBookRoute(): void {
     this.router.navigate(['books/create']);
+  }
+
+  routeToUpdate(id: any): void {
+    this.router.navigate(['books/update', id]);
+  }
+
+  deleteBook(id: any): void {
+    debugger
+    if (window.confirm('Chắc chắn xóa?')) {
+      this.httpService.delete(id).subscribe(data => {
+        if (data == null) {
+        alert('thành công');
+        this.router.navigate(['/books']);
+        }
+      },
+        error => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status == 404) { alert('Thất bại'); }
+          }
+        });
+    }
   }
 }

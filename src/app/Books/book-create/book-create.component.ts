@@ -31,14 +31,12 @@ export class BookCreateComponent {
       {
         alert('thành công');
         this.router.navigate(['books']);
-        
       }
       else
       {
         alert('không thành công');
       }
     });
-
   }
 
   

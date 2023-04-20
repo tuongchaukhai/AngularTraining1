@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import { BookUpdateComponent } from './Books/book-update/book-update.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatInputModule} from '@angular/material/input';
     BookComponent,
     PageNotFoundComponent,
     BookDetailsComponent,
-    BookCreateComponent
+    BookCreateComponent,
+    BookUpdateComponent
   ],
   imports: [
     BrowserModule,

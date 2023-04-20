@@ -4,12 +4,14 @@ import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
 import { BookCreateComponent } from './Books/book-create/book-create.component';
+import { BookUpdateComponent } from './Books/book-update/book-update.component';
 
 const routes: Routes = [
   { path: 'books', component: BookComponent },
   { path: 'books/details', component: BookDetailsComponent },
-  {path: 'books/create', component: BookCreateComponent},
-  { path: '*', component: PageNotFoundComponent }
+  { path: 'books/create', component: BookCreateComponent },
+  { path: '*', component: PageNotFoundComponent },
+  { path: 'books/update/:id', component: BookUpdateComponent }
 ];
 
 @NgModule({

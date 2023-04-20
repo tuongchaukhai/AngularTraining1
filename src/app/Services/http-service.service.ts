@@ -21,4 +21,8 @@ export class HttpServiceService {
   post(book: any): Observable<any> {
     return this.http.post<any>(`${this.url}`, book);
   }
+
+  put(book: any, id: any): Observable<any> {
+    return this.http.put<any>(`${this.url}/${id}`, book);
+  }
 }

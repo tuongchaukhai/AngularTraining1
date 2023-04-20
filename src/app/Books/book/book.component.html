@@ -11,10 +11,10 @@
         <td>{{book.title}}</td>
         <td>
             <div style="display: inline-block; margin-right: 10px;">
-              <button mat-button style="color: black; background-color:beige;" (click)="routeToUpdate(book.id)">Edit</button>
+              <button mat-button style="color: black; background-color:beige;" (click)="routeToUpdate(book.id); $event.stopPropagation()">Edit</button>
             </div>
             <div style="display: inline-block; margin-left: 10px;">
-              <button mat-button style="color: black; background-color:beige;" (click)="deleteBook(book.id)">Delete</button>
+              <button mat-button style="color: black; background-color:beige;" (click)="deleteBook(book.id); $event.stopPropagation()">Delete</button>
             </div>
           </td>
           

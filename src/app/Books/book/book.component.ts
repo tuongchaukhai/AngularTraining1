@@ -43,7 +43,7 @@ export class BookComponent {
       this.httpService.delete(id).subscribe(data => {
         if (data == null) {
         alert('thành công');
-        this.router.navigate(['/books']);
+        this.showBooks();
         }
       },
         error => {

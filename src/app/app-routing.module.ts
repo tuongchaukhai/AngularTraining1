@@ -12,8 +12,9 @@ const routes: Routes = [
   { path: 'books/details', component: BookDetailsComponent },
 
   { path: 'books/create', component: BookCreateComponent },
-  { path: '**', component: PageNotFoundComponent },
   { path: 'books/update/:id', component: BookUpdateComponent }
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({

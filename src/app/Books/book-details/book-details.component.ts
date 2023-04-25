@@ -12,30 +12,34 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
 
 export class BookDetailsComponent {
   constructor(private httpService: HttpServiceService, private route: ActivatedRoute, private router: Router) { }
-  public bookShow: Book[] = [];
+  public bookShow?: Book;
   public id: any;
   public title: any;
   public author: any;
 
 
   ngOnInit() {
+    debugger
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
+
       this.httpService.getById(id).subscribe(x => {
         this.bookShow = x;
+        console.log(this.bookShow);
       });
+
     }
     );
   }
 
   routeToUpdate(): void {
-    this.router.navigate(['books/update', this.bookShow[0].id]);
+    this.router.navigate(['books/update', this.bookShow?.id]);
   }
 
   deleteBook(): void {
     debugger
     if (window.confirm('Chắc chắn xóa?')) {
-      this.httpService.delete(this.bookShow[0].id).subscribe(data => {
+      this.httpService.delete(this.bookShow?.id).subscribe(data => {
         if (data == null) {
           alert('thành công');
           this.router.navigate(['books']);

@@ -13,7 +13,7 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
 export class BookComponent {
   public books?: Book[];
   public search: string = '';
-  public searchBy: string = '';
+  public searchBy: string = 'title';
   
   constructor(private httpService: HttpServiceService, private router: Router) { }
 

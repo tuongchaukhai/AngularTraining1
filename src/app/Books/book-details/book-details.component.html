@@ -1,9 +1,9 @@
 <div>
-    <ul *ngFor="let book of bookShow">
-        <li>Book ID: {{ book.id }}</li>
-        <li>Title: {{ book.title }}</li>
-        <li>Author: {{ book.author }}</li>
-        <li>IBSN: {{ book.ibsn }}</li>
+    <ul>
+        <li>Book ID: {{ bookShow?.id }}</li>
+        <li>Title: {{ bookShow?.title }}</li>
+        <li>Author: {{ bookShow?.author }}</li>
+        <li>IBSN: {{ bookShow?.ibsn }}</li>
     </ul>
 </div>
 

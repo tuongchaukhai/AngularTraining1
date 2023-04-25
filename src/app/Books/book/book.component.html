@@ -1,8 +1,8 @@
 <div>
   <input type="text" [(ngModel)]="search" />
   <select [(ngModel)]="searchBy">
-    <option value="title">Title</option>
-    <option value="author">Author</option>
+    <option value="title" [selected]="searchBy == 'title'">Title</option>
+    <option value="author"[selected]="searchBy == 'author'">Author</option>
   </select>
   <button (click)="searchBook(search,searchBy)">search</button>
 </div>

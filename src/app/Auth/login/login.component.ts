@@ -24,6 +24,9 @@ export class LoginComponent {
     this.service.login(loginData).subscribe(
       respone => {
         if (respone.success) {
+          debugger
+          localStorage.setItem('token', respone.data.accessToken);
+          console.log(respone.data.accessToken);
           console.log(respone.message);
         } else {
           console.log(respone.message);

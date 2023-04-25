@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,17 +13,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
 import { BookCreateComponent } from './Books/book-create/book-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './Auth/login/login.component';
 import { AuthService } from './Services/auth/auth.service';
+import { UserInterceptor } from './Services/Interceptors/user.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import { AuthService } from './Services/auth/auth.service';
     BookDetailsComponent,
     BookCreateComponent,
     BookUpdateComponent,
-    LoginComponent    
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,8 @@ import { AuthService } from './Services/auth/auth.service';
     MatCardModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

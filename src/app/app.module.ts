@@ -22,6 +22,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './Auth/login/login.component';
+import { AuthService } from './Services/auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     PageNotFoundComponent,
     BookDetailsComponent,
     BookCreateComponent,
-    BookUpdateComponent    
+    BookUpdateComponent,
+    LoginComponent    
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

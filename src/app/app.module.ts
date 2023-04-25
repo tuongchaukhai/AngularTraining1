@@ -21,7 +21,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +48,7 @@ import { BookUpdateComponent } from './Books/book-update/book-update.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatCardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,17 +12,21 @@ export class HttpServiceService {
 
   private url = 'https://localhost:7263/api/books';
 
-  getAll(): Observable<any> {
-    return this.http.get<any>(`${this.url}`);
+  getAll(page: number = 1): Observable<any> {
+    return this.http.get<any>(`${this.url}?page=${page}`);
   }
-  get(id?: any, title?: any, author?: any): Observable<any> {
-        if (id != undefined)
-      return this.http.get<any>(`${this.url}?id=${id}`);
-    else if (title != undefined)
-      return this.http.get<any>(`${this.url}?title=${title}`);
-    else 
-      return this.http.get<any>(`${this.url}?author=${author}`);
 
+  getById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.url}/${id}`);
+  }
+
+  search(search: any, searchBy: string, page: number = 1): Observable<any> {
+    if (search.Length > 0)
+      return this.getAll();
+    if (searchBy === "title")
+      return this.http.get<any>(`${this.url}?title=${search}&page=${page}`);
+    else
+      return this.http.get<any>(`${this.url}?author=${search}&page=${page}`);
   }
 
   post(book: any): Observable<any> {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
 
+'@angular/forms';
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -11,16 +12,16 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
 })
 export class BookComponent {
   public books?: Book[];
-
-
+  public search: string = '';
+  public searchBy: string = '';
+  
   constructor(private httpService: HttpServiceService, private router: Router) { }
 
   ngOnInit() {
     this.showBooks();
-
   }
 
-  showBooks(): void {
+  showBooks(page: number = 1): void {
     this.httpService.getAll().subscribe(books => this.books = books);
   }
 
@@ -35,6 +36,11 @@ export class BookComponent {
 
   routeToUpdate(id: any): void {
     this.router.navigate(['books/update', id]);
+  }
+
+  searchBook(search: string, searchBy: string): void {
+    debugger
+    this.httpService.search(search,searchBy).subscribe(book => this.books = book);
   }
 
   deleteBook(id: any): void {

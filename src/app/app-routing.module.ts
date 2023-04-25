@@ -6,6 +6,7 @@ import { BookDetailsComponent } from './Books/book-details/book-details.componen
 import { BookCreateComponent } from './Books/book-create/book-create.component';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
 
+
 const routes: Routes = [
   { path: '', component: BookComponent },
   { path: 'books', component: BookComponent },

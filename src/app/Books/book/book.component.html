@@ -1,23 +1,34 @@
+<div>
+  <input type="text" [(ngModel)]="search" />
+  <select [(ngModel)]="searchBy">
+    <option value="title">Title</option>
+    <option value="author">Author</option>
+  </select>
+  <button (click)="searchBook(search,searchBy)">search</button>
+</div>
+
 <table id="books" style="border-collapse: collapse;">
-    <tr>
-        <th>No.</th>
-        <th>ID</th>
-        <th>Title</th>
-        <th style="width: 200px;">#</th>
-    </tr>
-    <tr *ngFor="let book of books; let i = index" (click)="goToDetails(book)">
-        <td>{{i+1}}</td>
-        <td>{{book.id}}</td>
-        <td>{{book.title}}</td>
-        <td>
-            <div style="display: inline-block; margin-right: 10px;">
-              <button mat-button style="color: black; background-color:beige;" (click)="routeToUpdate(book.id); $event.stopPropagation()"><mat-icon>edit</mat-icon>Edit</button>
-            </div>
-            <div style="display: inline-block; margin-left: 10px;">
-              <button mat-button style="color: black; background-color:beige;" (click)="deleteBook(book.id); $event.stopPropagation()"><mat-icon>delete</mat-icon>Delete</button>
-            </div>
-          </td>
-          
-    </tr>
+  <tr>
+    <th>No.</th>
+    <th>ID</th>
+    <th>Title</th>
+    <th style="width: 200px;">#</th>
+  </tr>
+  <tr *ngFor="let book of books; let i = index" (click)="goToDetails(book)">
+    <td>{{i+1}}</td>
+    <td>{{book.id}}</td>
+    <td>{{book.title}}</td>
+    <td>
+      <div style="display: inline-block; margin-right: 10px;">
+        <button mat-button style="color: black; background-color:beige;"
+          (click)="routeToUpdate(book.id); $event.stopPropagation()"><mat-icon>edit</mat-icon>Edit</button>
+      </div>
+      <div style="display: inline-block; margin-left: 10px;">
+        <button mat-button style="color: black; background-color:beige;"
+          (click)="deleteBook(book.id); $event.stopPropagation()"><mat-icon>delete</mat-icon>Delete</button>
+      </div>
+    </td>
+
+  </tr>
 </table>
 <button mat-raised-button color="primary" (click)="createBookRoute()">Create</button>

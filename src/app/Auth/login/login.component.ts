@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { LoginViewModel } from 'src/app/ViewModels/login.model';
 
@@ -14,22 +15,21 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.maxLength(15)]]
   });
 
-  constructor(private fb: FormBuilder, private service: AuthService) { }
+  constructor(private fb: FormBuilder, private service: AuthService, private router: Router) { }
 
   onSubmit(): void {
     const loginData: LoginViewModel = {
       email: this.formLogin.value.email || "",
       password: this.formLogin.value.password || ""
     };
-    this.service.login(loginData).subscribe(
+    this.service.logIn(loginData).subscribe(
       respone => {
         if (respone.success) {
-          debugger
-          localStorage.setItem('token', respone.data.accessToken);
-          console.log(respone.data.accessToken);
-          console.log(respone.message);
+          this.service.setToken(respone.data.accessToken);
+          alert(respone.message);
+          this.router.navigate(['/']);
         } else {
-          console.log(respone.message);
+          alert(respone.message);
         }
       },
       err => {

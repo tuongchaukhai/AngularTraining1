@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
 
@@ -14,15 +14,21 @@ export class BookComponent {
   public books?: Book[];
   public search: string = '';
   public searchBy: string = 'title';
-  
-  constructor(private httpService: HttpServiceService, private router: Router) { }
+  public page : number | undefined
+  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.showBooks();
+    
+    this.route.queryParams.subscribe(params => {
+      this.page = parseInt(params['page'] || '1', 10)
+    });
+    this.showBooks(this.page);
+
   }
 
   showBooks(page: number = 1): void {
-    this.httpService.getAll().subscribe(books => this.books = books);
+
+    this.httpService.getAll(page).subscribe(books => this.books = books);
   }
 
   goToDetails(book: Book): void {
@@ -59,4 +65,9 @@ export class BookComponent {
         });
     }
   }
+
+  // isAdmin(): boolean {
+  //   var role = Role?.Iden
+  //   if()
+  // }
 }

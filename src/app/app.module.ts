@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './Auth/login/login.component';
 import { AuthService } from './Services/auth/auth.service';
 import { UserInterceptor } from './Services/Interceptors/user.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,

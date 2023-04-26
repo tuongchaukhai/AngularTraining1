@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterLink, RouterModule, Routes } from '@angular/router';
 import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
 import { BookCreateComponent } from './Books/book-create/book-create.component';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
 import { LoginComponent } from './Auth/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -13,8 +14,8 @@ const routes: Routes = [
   { path: 'books', component: BookComponent },
   { path: 'books/details', component: BookDetailsComponent },
 
-  { path: 'books/create', component: BookCreateComponent },
-  { path: 'books/update/:id', component: BookUpdateComponent },
+  { path: 'books/create', component: BookCreateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] }  },
+  { path: 'books/update/:id', component: BookUpdateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] } },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent },
 

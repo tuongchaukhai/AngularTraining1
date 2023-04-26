@@ -4,7 +4,9 @@
       <a mat-button routerLink="books"><mat-icon>menu</mat-icon>Home</a>
     </div>
     <div>
-      <a mat-button (click)="logOut()"><mat-icon>logout</mat-icon>Logout</a>
+      <a mat-button *ngIf="isLogged; else loginButton" (click)="logOut()"><mat-icon>logout</mat-icon>Logout</a>
+      <ng-template #loginButton> <a mat-button routerLink="/login"><mat-icon>login</mat-icon>LogIn</a></ng-template>
+
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

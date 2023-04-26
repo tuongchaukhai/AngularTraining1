@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
+import { AuthService } from 'src/app/Services/auth/auth.service';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
 
 '@angular/forms';
@@ -14,11 +15,11 @@ export class BookComponent {
   public books?: Book[];
   public search: string = '';
   public searchBy: string = 'title';
-  public page : number | undefined
-  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute) { }
+  public page: number | undefined
+  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
-    
+
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params['page'] || '1', 10)
     });
@@ -46,7 +47,7 @@ export class BookComponent {
 
   searchBook(search: string, searchBy: string): void {
     debugger
-    this.httpService.search(search,searchBy).subscribe(book => this.books = book);
+    this.httpService.search(search, searchBy).subscribe(book => this.books = book);
   }
 
   deleteBook(id: any): void {
@@ -54,8 +55,8 @@ export class BookComponent {
     if (window.confirm('Chắc chắn xóa?')) {
       this.httpService.delete(id).subscribe(data => {
         if (data == null) {
-        alert('thành công');
-        this.showBooks();
+          alert('thành công');
+          this.showBooks();
         }
       },
         error => {
@@ -66,8 +67,10 @@ export class BookComponent {
     }
   }
 
-  // isAdmin(): boolean {
-  //   var role = Role?.Iden
-  //   if()
-  // }
+  isAdmin(): boolean {
+    const role = this.authService.userRole;
+    if ((['admin', 'staff'].includes(role)))
+      return true;
+    return false;
+  }
 }

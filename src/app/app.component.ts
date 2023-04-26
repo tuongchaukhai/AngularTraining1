@@ -8,7 +8,10 @@ import { AuthService } from './Services/auth/auth.service';
 })
 export class AppComponent {
   title = 'AngularTraining1';
-  constructor(private authservice: AuthService){}
+  isLogged : boolean = false;
+  constructor(private authservice: AuthService){
+    this.isLogged = this.authservice.isLoggedIn();
+  }
 
   logOut() : void {
     this.authservice.logOut();

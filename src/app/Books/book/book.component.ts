@@ -38,7 +38,7 @@ export class BookComponent {
   }
 
   createBookRoute(): void {
-    this.router.navigate(['books/create']);
+    this.router.navigate(['admin/books/create']);
   }
 
   routeToUpdate(id: any): void {

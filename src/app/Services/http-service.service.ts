@@ -38,6 +38,6 @@ export class HttpServiceService {
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete<any>(`${this.url}?id=${id}`, id);
+    return this.http.delete<any>(`${this.url}/${id}`, id);
   }
 }

@@ -17,19 +17,6 @@ export class AuthService implements IAuthService {
   public roles: string = '';
   
   constructor(private http: HttpClient, private router: Router) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      const user: User = {
-        userId: decodedToken.userId,
-        email: decodedToken.email,
-        role: decodedToken.role,
-        fullName: decodedToken.fullName,
-        roleId: decodedToken.roleId,
-        refreshTokens: decodedToken.refreshTokens
-      };
-    }
   }
 
   logIn(request: LoginViewModel): Observable<any> {
@@ -60,7 +47,6 @@ export class AuthService implements IAuthService {
       return;
     }
     else{
-      debugger
       localStorage.setItem('token', token);
       const helper =  new JwtHelperService();
       const decoded = helper.decodeToken(token)

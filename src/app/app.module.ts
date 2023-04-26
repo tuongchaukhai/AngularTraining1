@@ -24,6 +24,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import { AuthService } from './Services/auth/auth.service';
 import { UserInterceptor } from './Services/Interceptors/user.interceptor';
 import { AdminModule } from './admin/admin.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AdminModule } from './admin/admin.module';
     MatFormFieldModule,
     MatCardModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    MatSnackBarModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],

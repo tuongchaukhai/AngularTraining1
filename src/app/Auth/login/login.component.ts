@@ -25,11 +25,10 @@ export class LoginComponent {
     this.service.logIn(loginData).subscribe(
       respone => {
         if (respone.success) {
-          this.service.setToken(respone.data.accessToken);
-          alert(respone.message);
+          // alert(respone.message);
           this.router.navigate(['/']);
         } else {
-          alert(respone.message);
+          // alert(respone.message);
         }
       },
       err => {

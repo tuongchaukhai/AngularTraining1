@@ -10,7 +10,13 @@ export class AppComponent {
   title = 'AngularTraining1';
   isLogged : boolean = false;
   constructor(private authservice: AuthService){
-    this.isLogged = this.authservice.isLoggedIn();
+    this.authservice.user.subscribe(user => {
+      if(user != null){
+        this.isLogged = true;
+    }
+    else { 
+      this.isLogged = false;
+  }});
   }
 
   logOut() : void {

@@ -14,8 +14,9 @@ const routes: Routes = [
   { path: 'books', component: BookComponent },
   { path: 'books/details', component: BookDetailsComponent },
 
-  { path: 'books/create', component: BookCreateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] }  },
-  { path: 'books/update/:id', component: BookUpdateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] } },
+  // { path: 'books/create', component: BookCreateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] } },
+  // { path: 'books/update/:id', component: BookUpdateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] } },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule) },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent },
 

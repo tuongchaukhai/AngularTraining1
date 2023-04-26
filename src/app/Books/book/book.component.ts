@@ -42,7 +42,7 @@ export class BookComponent {
   }
 
   routeToUpdate(id: any): void {
-    this.router.navigate(['books/update', id]);
+    this.router.navigate(['admin/books/update', id]);
   }
 
   searchBook(search: string, searchBy: string): void {

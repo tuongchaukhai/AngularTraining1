@@ -19,7 +19,6 @@ export class BookDetailsComponent {
 
 
   ngOnInit() {
-    debugger
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
 

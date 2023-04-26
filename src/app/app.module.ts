@@ -15,25 +15,22 @@ import { BookComponent } from './Books/book/book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatTableModule } from '@angular/material/table';
 import { BookDetailsComponent } from './Books/book-details/book-details.component';
-import { BookCreateComponent } from './Books/book-create/book-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { BookUpdateComponent } from './Books/book-update/book-update.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './Auth/login/login.component';
 import { AuthService } from './Services/auth/auth.service';
 import { UserInterceptor } from './Services/Interceptors/user.interceptor';
-import { AuthGuard } from './guards/auth.guard';
+import { AdminModule } from './admin/admin.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     PageNotFoundComponent,
     BookDetailsComponent,
-    BookCreateComponent,
-    BookUpdateComponent,
     LoginComponent
   ],
   imports: [
@@ -53,7 +50,8 @@ import { AuthGuard } from './guards/auth.guard';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    AdminModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],

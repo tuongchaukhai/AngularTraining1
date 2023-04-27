@@ -5,7 +5,11 @@
     </div>
     <div>
       <a mat-button *ngIf="isLogged; else loginButton" (click)="logOut()"><mat-icon>logout</mat-icon>Logout</a>
-      <ng-template #loginButton> <a mat-button routerLink="/login"><mat-icon>login</mat-icon>LogIn</a></ng-template>
+      <ng-template #loginButton> 
+        <a mat-button routerLink="/login"><mat-icon>login</mat-icon>LogIn</a>
+        <a mat-button routerLink="/register"><mat-icon>signup</mat-icon>Register</a>
+      </ng-template>
+      
 
     </div>
   </mat-toolbar-row>

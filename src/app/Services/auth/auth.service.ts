@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IAuthService } from './auth-interface';
 import { HttpClient } from '@angular/common/http';
 import { LoginViewModel } from 'src/app/ViewModels/login.model';
-import { BehaviorSubject, Observable, catchError, empty, map } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, empty, map, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/Models/user';
@@ -34,38 +34,34 @@ export class AuthService implements IAuthService {
     }
   }
 
-  // logIn(request: LoginViewModel): Observable<any> {
-  //     return this.http.post<any>(`${this.url}`, request);
-  // }
+logIn(request: LoginViewModel): Observable<any> {
+  return this.http.post<any>(`${this.url}`, request).pipe(
+    map(response => {
+      if (response.success) {
+        this.setToken(response.data.accessToken);
+        return { success: true, message: 'Login successful' };
+      }
+      else {
+        return { success: true, message: 'Login failed' };
+      }
+    }),
+    catchError(error => {
+      return this.errorHandle.handleError(error);
+    })
+  );
+}
 
-  logIn(request: LoginViewModel): Observable<any> {
-    return this.http.post<any>(`${this.url}`, request).pipe(
-      map(response => {
-        if (response.success) {
-          this.setToken(response.data.accessToken);
-          this.snackBar.open('Login successful', 'Close', { duration: 2000 });
-          return { success: true, message: 'Login successful' };
-        }
-        else {
-          this.snackBar.open('Login failed', 'Close', { duration: 2000 });
-          return { success: false, message: 'Login failed'};
-        }
-      }),
-      catchError(error => {
-        return this.errorHandle.handleError(error);
-      })
-    );
-  }
 
 
   logOut(): void {
     localStorage.removeItem('token');
+    this.userSubject.next(null);
     this.router.navigate(['/']);
   }
 
   public get userRole(): string {
     const user = this.userSubject.value;
-    return user ? user.role.roleName : '';
+    return user ? user.role.toString() : '';
   }
 
   isLoggedIn(): boolean {

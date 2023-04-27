@@ -21,5 +21,6 @@ export class AppComponent {
 
   logOut() : void {
     this.authservice.logOut();
+    this.isLogged = false;
   }
 }

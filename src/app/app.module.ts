@@ -25,6 +25,8 @@ import { AuthService } from './Services/auth/auth.service';
 import { UserInterceptor } from './Services/Interceptors/user.interceptor';
 import { AdminModule } from './admin/admin.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmDeleteDialogComponent } from './Books/book/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BookComponent,
     PageNotFoundComponent,
     BookDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     FormsModule,
     AdminModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],

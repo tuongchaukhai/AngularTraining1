@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/Models/user';
 import { ErrorHandlingService } from '../error-handling.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RegisterDto } from 'src/app/ViewModels/registerDto';
 
 
 @Injectable({
@@ -51,7 +52,22 @@ logIn(request: LoginViewModel): Observable<any> {
   );
 }
 
-
+ register(dto: RegisterDto): Observable<any> {
+   return this.http.post<any>(`${this.url}/register`, dto).pipe(
+    map(response => {
+      if (response.success) {
+        debugger
+        return response.message;
+      }
+      else {
+        return response.message;
+      }
+    }),
+    catchError(error => {
+      return this.errorHandle.handleError(error);
+    })
+  );
+}
 
   logOut(): void {
     localStorage.removeItem('token');

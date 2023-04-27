@@ -7,6 +7,7 @@ import { BookCreateComponent } from './Books/book-create/book-create.component';
 import { BookUpdateComponent } from './Books/book-update/book-update.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './Auth/register/register.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,8 @@ const routes: Routes = [
   // { path: 'books/update/:id', component: BookUpdateComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'staff'] } },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule) },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
   { path: '**', component: PageNotFoundComponent },
 
 ];

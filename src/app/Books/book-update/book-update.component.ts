@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmUpdateDialogComponent } from '../confirm-update-dialog/confirm-update-dialog.component';
 
 @Component({
   selector: 'app-book-update',
@@ -11,7 +13,7 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
 })
 export class BookUpdateComponent {
   public formData: FormGroup;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private httpService: HttpServiceService, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private httpService: HttpServiceService, private router: Router, private dialog: MatDialog) {
     this.formData = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(150)]],
       author: ['', [Validators.required, Validators.maxLength(100)]],
@@ -44,6 +46,28 @@ export class BookUpdateComponent {
         {
           alert('không thành công');
         }
+      }
+    });
+  }
+
+  openDialogUpdateConfirm(bookId: number)
+  {
+    const dialogRef = this.dialog.open(ConfirmUpdateDialogComponent, {
+      data: { bookId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.httpService.delete(bookId).subscribe(data => {
+          if (data == null) {
+            alert('success');
+          }
+        },
+          error => {
+            // if (error instanceof HttpErrorResponse) {
+            //   if (error.status == 404) { alert('failed'); }
+            // }
+          });
       }
     });
   }

@@ -65,22 +65,22 @@ export class BookComponent {
     this.httpService.search(search, searchBy).subscribe(book => this.books = book);
   }
 
-  deleteBook(id: any): void {
-    debugger
-    if (window.confirm('Chắc chắn xóa?')) {
-      this.httpService.delete(id).subscribe(data => {
-        if (data == null) {
-          alert('thành công');
-          this.showBooks();
-        }
-      },
-        error => {
-          if (error instanceof HttpErrorResponse) {
-            if (error.status == 404) { alert('Thất bại'); }
-          }
-        });
-    }
-  }
+  // deleteBook(id: any): void {
+  //   debugger
+  //   if (window.confirm('Chắc chắn xóa?')) {
+  //     this.httpService.delete(id).subscribe(data => {
+  //       if (data == null) {
+  //         alert('thành công');
+  //         this.showBooks();
+  //       }
+  //     },
+  //       error => {
+  //         if (error instanceof HttpErrorResponse) {
+  //           if (error.status == 404) { alert('Thất bại'); }
+  //         }
+  //       });
+  //   }
+  // }
 
   // isAdmin(): boolean {
   //   const role = this.authService.userRole;

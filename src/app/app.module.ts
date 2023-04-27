@@ -28,6 +28,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from './Books/book/confirm-delete-dialog/confirm-delete-dialog.component';
 import { RegisterComponent } from './Auth/register/register.component';
+import { ConfirmUpdateDialogComponent } from './Books/confirm-update-dialog/confirm-update-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RegisterComponent } from './Auth/register/register.component';
     BookDetailsComponent,
     LoginComponent,
     ConfirmDeleteDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmUpdateDialogComponent
   ],
   imports: [
     BrowserModule,

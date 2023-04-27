@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Book } from 'src/app/Models/book';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
+import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 
 '@angular/forms';
 @Component({
@@ -11,12 +13,24 @@ import { HttpServiceService } from 'src/app/Services/http-service.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
+
 export class BookComponent {
   public books?: Book[];
   public search: string = '';
   public searchBy: string = 'title';
-  public page: number | undefined
-  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { }
+  public page: number | undefined;
+  public isAdmin: boolean = false;
+  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dialog: MatDialog) { 
+    this.authService.user.subscribe(user => {
+      if(user?.role.toString() == 'admin' || user?.role.toString() == 'staff')
+      {
+        this.isAdmin = true;
+      }
+      else {
+        this.isAdmin = false;
+      }
+    })
+  }
 
   ngOnInit() {
 
@@ -42,6 +56,7 @@ export class BookComponent {
   }
 
   routeToUpdate(id: any): void {
+    debugger
     this.router.navigate(['admin/books/update', id]);
   }
 
@@ -67,10 +82,33 @@ export class BookComponent {
     }
   }
 
-  isAdmin(): boolean {
-    const role = this.authService.userRole;
-    if ((['admin', 'staff'].includes(role)))
-      return true;
-    return false;
+  // isAdmin(): boolean {
+  //   const role = this.authService.userRole;
+  //   if ((['admin', 'staff'].includes(role)))
+  //     return true;
+  //   return false;
+  // }
+
+  openDialogDelete(bookId: number)
+  {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      data: { bookId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.httpService.delete(bookId).subscribe(data => {
+          if (data == null) {
+            alert('success');
+            this.showBooks();
+          }
+        },
+          error => {
+            if (error instanceof HttpErrorResponse) {
+              if (error.status == 404) { alert('failed'); }
+            }
+          });
+      }
+    });
   }
 }

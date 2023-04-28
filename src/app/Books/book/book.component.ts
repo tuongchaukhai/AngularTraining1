@@ -23,10 +23,7 @@ export class BookComponent {
   public isAdmin: boolean = false;
   public loading: boolean = false;
   layout: string = 'list';
-  virtualDatabase: Book[] = [];
   totalRecords: number = 0;
-  pageSize: number = 0;
-  totalPages: number = 0;
 
 
   constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dialog: MatDialog) {
@@ -46,9 +43,9 @@ export class BookComponent {
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params['page'] || '1', 10)
     });
-
+    
     this.httpService.getAll(1).subscribe(results => {
-      this.books = results.books;
+      this.books = results.bookSkip;
       this.totalRecords = results.totalBooks;
     });
   }
@@ -77,12 +74,22 @@ export class BookComponent {
     this.httpService.search(search, searchBy).subscribe(book => this.books = book);
   }
 
+  // loadBooksLazy(event: LazyLoadEvent) {
+  //   debugger
+  //   if (event.first && event.rows) {
+  //     const page = (event.first / event.rows) + 1;
+  //     this.httpService.getAll(page).subscribe(results => {
+  //       this.books = results.books;
+  //     })
+  //   }
+  // }
+
   loadBooksLazy(event: LazyLoadEvent) {
     debugger
     if (event.first && event.rows) {
       const page = (event.first / event.rows) + 1;
       this.httpService.getAll(page).subscribe(results => {
-        this.books = results.books;
+        this.books = results.bookSkip;
       })
     }
   }

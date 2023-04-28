@@ -29,6 +29,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from './Books/book/confirm-delete-dialog/confirm-delete-dialog.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { ConfirmUpdateDialogComponent } from './Books/confirm-update-dialog/confirm-update-dialog.component';
+import { DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,11 @@ import { ConfirmUpdateDialogComponent } from './Books/confirm-update-dialog/conf
     FormsModule,
     AdminModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    DataViewModule,
+    TagModule,
+    PanelModule
+    
   ],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true }],

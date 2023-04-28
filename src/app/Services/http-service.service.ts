@@ -14,7 +14,9 @@ export class HttpServiceService {
   private url = 'https://localhost:7263/api/books';
 
   getAll(page: number = 1): Observable<any> {
-    return this.http.get<any>(`${this.url}?page=${page}`);
+    let url = `${this.url}?page=${page}`;
+    console.log(url);
+    return this.http.get<any>(url);
   }
 
   getById(id: any): Observable<any> {

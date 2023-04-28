@@ -6,6 +6,7 @@ import { Book } from 'src/app/Models/book';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { HttpServiceService } from 'src/app/Services/http-service.service';
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
+import { LazyLoadEvent } from 'primeng/api';
 
 '@angular/forms';
 @Component({
@@ -15,21 +16,29 @@ import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-de
 })
 
 export class BookComponent {
-  public books?: Book[];
+  public books: Book[] = [];
   public search: string = '';
   public searchBy: string = 'title';
   public page: number | undefined;
   public isAdmin: boolean = false;
-  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dialog: MatDialog) { 
+  public loading: boolean = false;
+  layout: string = 'list';
+  virtualDatabase: Book[] = [];
+  totalRecords: number = 0;
+  pageSize: number = 0;
+  totalPages: number = 0;
+
+
+  constructor(private httpService: HttpServiceService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private dialog: MatDialog) {
     this.authService.user.subscribe(user => {
-      if(user?.role.toString() == 'admin' || user?.role.toString() == 'staff')
-      {
+      if (user?.role.toString() == 'admin' || user?.role.toString() == 'staff') {
         this.isAdmin = true;
       }
       else {
         this.isAdmin = false;
       }
-    })
+    });
+
   }
 
   ngOnInit() {
@@ -37,8 +46,11 @@ export class BookComponent {
     this.route.queryParams.subscribe(params => {
       this.page = parseInt(params['page'] || '1', 10)
     });
-    this.showBooks(this.page);
 
+    this.httpService.getAll(1).subscribe(results => {
+      this.books = results.books;
+      this.totalRecords = results.totalBooks;
+    });
   }
 
   showBooks(page: number = 1): void {
@@ -65,32 +77,18 @@ export class BookComponent {
     this.httpService.search(search, searchBy).subscribe(book => this.books = book);
   }
 
-  // deleteBook(id: any): void {
-  //   debugger
-  //   if (window.confirm('Chắc chắn xóa?')) {
-  //     this.httpService.delete(id).subscribe(data => {
-  //       if (data == null) {
-  //         alert('thành công');
-  //         this.showBooks();
-  //       }
-  //     },
-  //       error => {
-  //         if (error instanceof HttpErrorResponse) {
-  //           if (error.status == 404) { alert('Thất bại'); }
-  //         }
-  //       });
-  //   }
-  // }
+  loadBooksLazy(event: LazyLoadEvent) {
+    debugger
+    if (event.first && event.rows) {
+      const page = (event.first / event.rows) + 1;
+      this.httpService.getAll(page).subscribe(results => {
+        this.books = results.books;
+      })
+    }
+  }
 
-  // isAdmin(): boolean {
-  //   const role = this.authService.userRole;
-  //   if ((['admin', 'staff'].includes(role)))
-  //     return true;
-  //   return false;
-  // }
 
-  openDialogDelete(bookId: number)
-  {
+  openDialogDelete(bookId: number) {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       data: { bookId },
     });
